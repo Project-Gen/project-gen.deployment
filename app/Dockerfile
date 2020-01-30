@@ -1,7 +1,7 @@
 FROM ubuntu:19.04
 
 ARG root_dir=/app
-ENV ROOT_DIR=$root_dir
+ENV ROOT_DIR $root_dir
 
 WORKDIR $root_dir
 
