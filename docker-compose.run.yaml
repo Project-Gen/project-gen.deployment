@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  core:
+    restart: always
+    container_name: project-gen.core
+    volumes:
+      - project-gen.vlm.logs:/app/logs
+    ports:
+      - "3100:80"
+    environment:
+      PG_URL: postgres://${PG_USER:-user}:${PG_PASSWORD:-password}@postgres/${DB_NAME:-project-gen}
+      NODE_ENV: ${NODE_ENV:-production}
+      JWT_SECRET: ${JWT_SECRET:-very-secret}
+      PORT: 3100
+    depends_on:
+      - postgres
+
+  postgres:
+    restart: always
+    container_name: project-gen.postgres
+    volumes:
+      - project-gen.vlm.postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DB_NAME:-project-gen}
+      POSTGRES_USER: ${PG_USER:-user}
+      POSTGRES_PASSWORD: ${PG_PASSWORD:-password}
+
+volumes:
+  project-gen.vlm.logs:
+  project-gen.vlm.postgres:

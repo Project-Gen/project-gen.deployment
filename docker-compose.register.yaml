@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  core:
+    image: vikei/project-gen.core
+
+  postgres:
+    image: postgres:11.2
