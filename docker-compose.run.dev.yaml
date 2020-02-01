@@ -2,8 +2,6 @@ version: "3"
 
 services:
   core:
-    image: vikei/project-gen.core
-    container_name: project-gen.core
     volumes:
       - ../project-gen.core:/app/core
       - /app/core/node_modules
