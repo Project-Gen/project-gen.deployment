@@ -1,13 +1,15 @@
-#!/bin/bash
+#!/bin/bash -e
 
 service nginx start
 
 cd core
 
-if [ "$NODE_ENV" = "production" ]; then
-  npm start
-fi
+case "$NODE_ENV" in
+  "production")
+    npm run start:prod
+    ;;
 
-if [ "$NODE_ENV" = "development" ]; then
-  npm run start:dev
-fi
+  "development")
+    npm run start:dev
+    ;;
+esac

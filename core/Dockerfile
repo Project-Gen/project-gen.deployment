@@ -16,9 +16,9 @@ RUN rm /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 RUN mkdir $root_dir/logs
 
 WORKDIR $root_dir/core
-COPY code/package.json .
-RUN npm i
 COPY code .
+RUN npm i
+RUN npm run build
 
 WORKDIR $root_dir
 COPY entrypoint.sh .
