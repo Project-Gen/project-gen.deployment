@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  core:
+    volumes:
+      - ../project-gen.core:/app/core
+      - /app/core/node_modules
+    environment:
+      NODE_ENV: test
+      PG_URL: postgres://${PG_USER:-user}:${PG_PASSWORD:-password}@postgres-test/${DB_NAME:-project-gen}
+    depends_on:
+      - postgres-test
+
+  postgres-test:
+    image: postgres:11.2
+    restart: always
+    container_name: project-gen.postgres-test
+    volumes:
+      - project-gen.vlm.postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DB_NAME:-project-gen}
+      POSTGRES_USER: ${PG_USER:-user}
+      POSTGRES_PASSWORD: ${PG_PASSWORD:-password}
+
+volumes:
+  project-gen.vlm.postgres-test:

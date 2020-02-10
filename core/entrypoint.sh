@@ -12,4 +12,8 @@ case "$NODE_ENV" in
   "development")
     npm run start:dev
     ;;
+
+  "test")
+    while true; do sleep 1d; done
+    ;;
 esac
